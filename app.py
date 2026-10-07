@@ -15,7 +15,7 @@ from google.genai import types
 from pypdf import PdfReader
 
 # ----------------------------- Config ---------------------------------------
-MODEL_OPTIONS = ["gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-flash-latest"]
+MODEL_OPTIONS = ["gemini-3.5-flash", "gemini-flash-latest", "gemini-3.1-flash-lite", "gemini-2.5-flash"]
 MAX_RESUME_CHARS = 20_000  # keeps the prompt small and fast
 MAX_FILE_MB = 5
 
@@ -203,7 +203,7 @@ def friendly_error(exc: Exception) -> str:
     if "429" in low or "quota" in low or "resource_exhausted" in low:
         return "Rate limit / quota reached. Wait a minute and try again, or use another key."
     if "404" in low or "not found" in low:
-        return "That model name is not available for your key. Pick another model in the sidebar."
+        return f"That model is not available for your key. Pick another model in the sidebar. (Details: {msg[:200]})"
     return f"Something went wrong: {msg}"
 
 
